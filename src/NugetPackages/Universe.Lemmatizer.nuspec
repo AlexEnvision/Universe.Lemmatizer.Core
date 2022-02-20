@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Universe.NetCore.Lemmatizer</id>
+    <version>0.9.5.0</version>
+    <authors>Alex Envision</authors>
+    <owners>Alex Envision</owners>
+    <license type="file">APACHE-2.0 LICENSE.txt</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Реализация библиотеки Lemmatizer для .NET 5.0. Входит в состав Universe.Framework</description>
+	  <repository type="git" url="https://gitlab.com/AlexEnvision/Universe.Lemmatizer.Core" branch="master" />
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright © Alex Envision, 2019-2022</copyright>
+    <tags>Universe.Framework, Lemmatizer</tags>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1" >
+        <dependency id="System.Text.Encoding" version="4.3.0" />
+        <dependency id="System.Text.Encoding.CodePages" version="6.0.0" />
+      </group>
+      <group targetFramework=".NET5.0" >
+        <dependency id="System.Text.Encoding" version="4.3.0" />
+        <dependency id="System.Text.Encoding.CodePages" version="6.0.0" />
+      </group>
+    </dependencies>
+    <contentFiles>
+      <files include="any/any/LemmatizerBinary/RML/Bin/*.*" buildAction="content" copyToOutput="true" />
+      <files include="any/any/LemmatizerBinary/RML/Dicts/Morph/*.*" buildAction="content" copyToOutput="true" />
+      <files include="any/any/LemmatizerBinary/RML/Dicts/Morph/Rus/*.*" buildAction="content" copyToOutput="true" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="..\License\APACHE-2.0 LICENSE.txt" target="" />
+    <file src="..\Universe.Lemmatizer\bin\Release\net5.0\Universe.Lemmatizer.dll" target="lib\net5.0" />
+    <file src="..\Universe.Lemmatizer\LemmatizerBinary\RML\Bin\*.*" target="contentFiles\LemmatizerBinary\RML\Bin" />
+    <file src="..\Universe.Lemmatizer\LemmatizerBinary\RML\Dicts\Morph\*.*" target="contentFiles\LemmatizerBinary\RML\Dicts\Morph" />
+    <file src="..\Universe.Lemmatizer\LemmatizerBinary\RML\Dicts\Morph\Rus\*.*" target="contentFiles\LemmatizerBinary\RML\Dicts\Morph\Rus" />
+    <file src="..\Universe.Lemmatizer\LemmatizerBinary\RML\Bin\*.*" target="contentFiles\any\any\LemmatizerBinary\RML\Bin" />
+    <file src="..\Universe.Lemmatizer\LemmatizerBinary\RML\Dicts\Morph\*.*" target="contentFiles\any\any\LemmatizerBinary\RML\Dicts\Morph" />
+    <file src="..\Universe.Lemmatizer\LemmatizerBinary\RML\Dicts\Morph\Rus\*.*" target="contentFiles\any\any\LemmatizerBinary\RML\Dicts\Morph\Rus" />
+  </files>
+</package>

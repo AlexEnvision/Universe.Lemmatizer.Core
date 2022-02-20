@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Universe.Lemmatizer", "Universe.Lemmatizer\Universe.Lemmatizer.csproj", "{3D1370CC-1877-4FAC-9E7E-615577E83409}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "~SolutionItems", "~SolutionItems", "{F764C315-0AF5-47CF-A11C-14DC8DF66A62}"
+	ProjectSection(SolutionItems) = preProject
+		..\Version.txt = ..\Version.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NugetPackages", "NugetPackages", "{17735C78-41F1-4A0F-9CC0-49F79DCAD274}"
+	ProjectSection(SolutionItems) = preProject
+		NugetPackages\build-packages.ps1 = NugetPackages\build-packages.ps1
+		NugetPackages\Universe.Lemmatizer.nuspec = NugetPackages\Universe.Lemmatizer.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B6CF7EA1-39B1-4EA7-8845-F0BE5CA2C299}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Universe.Lemmatizer.Tests.FormsApp", "Tests\Universe.Lemmatizer.Tests.FormsApp\Universe.Lemmatizer.Tests.FormsApp.csproj", "{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM32 = Debug|ARM32
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|ARM32 = Release|ARM32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Debug|ARM32.ActiveCfg = Debug|ARM32
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Debug|ARM32.Build.0 = Debug|ARM32
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Debug|x64.ActiveCfg = Debug|x64
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Debug|x64.Build.0 = Debug|x64
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Release|ARM32.ActiveCfg = Release|ARM32
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Release|ARM32.Build.0 = Release|ARM32
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Release|x64.ActiveCfg = Release|x64
+		{3D1370CC-1877-4FAC-9E7E-615577E83409}.Release|x64.Build.0 = Release|x64
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Debug|ARM32.ActiveCfg = Debug|Any CPU
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Debug|ARM32.Build.0 = Debug|Any CPU
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Debug|x64.Build.0 = Debug|Any CPU
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Release|ARM32.ActiveCfg = Release|Any CPU
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Release|ARM32.Build.0 = Release|Any CPU
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Release|x64.ActiveCfg = Release|Any CPU
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{17735C78-41F1-4A0F-9CC0-49F79DCAD274} = {F764C315-0AF5-47CF-A11C-14DC8DF66A62}
+		{446A015E-6A4C-46E7-B1B0-22EC23F7F1E9} = {B6CF7EA1-39B1-4EA7-8845-F0BE5CA2C299}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D5E6F140-511D-49EF-9E1F-5CBA052EF098}
+	EndGlobalSection
+EndGlobal

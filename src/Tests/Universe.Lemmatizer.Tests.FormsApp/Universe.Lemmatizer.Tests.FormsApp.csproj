@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Universe.NetCore.Algorithm" Version="0.9.3.4" />
+    <PackageReference Include="Universe.NetCore.Helpers" Version="0.9.3.4" />
+    <PackageReference Include="Universe.NetCore.Lemmatizer" Version="0.9.5" />
+    <PackageReference Include="Universe.NetCore.Types" Version="0.9.3.4" />
+    <PackageReference Include="Universe.NetCore.Windows.Forms.Controls" Version="0.9.3.4" />
+  </ItemGroup>
+
+</Project>
