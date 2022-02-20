@@ -33,16 +33,20 @@
 //  ║                                                                                 ║
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Implement.Morphology
 {
-    internal enum InternalMorphLanguage
+    internal class MorphAutomRelation
     {
-        morphUnknown,
-        morphRussian,
-        morphEnglish,
-        morphGerman,
-        morphGeneric,
-        morphURL,
-        morphDigits
+        private uint _data;
+
+        public int ChildNo => (int) _data & 16777215;
+
+        public int Data
+        {
+            get => (int) _data;
+            set => _data = (uint) value;
+        }
+
+        public byte RelationalChar => (byte) (_data >> 24);
     }
 }

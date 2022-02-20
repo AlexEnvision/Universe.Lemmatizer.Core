@@ -33,14 +33,16 @@
 //  ║                                                                                 ║
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
-namespace Universe.Lemmatizer.Implement
+using Universe.Lemmatizer.Models;
+
+namespace Universe.Lemmatizer.Implement.Lemmas
 {
-    internal class LemmatizerEnglish : Lemmatizer
+    internal class LemmatizerGerman : Lemmas.Lemmatizer
     {
-        public LemmatizerEnglish()
-            : base(InternalMorphLanguage.morphEnglish)
+        public LemmatizerGerman()
+            : base(InternalMorphLanguage.MorphGerman)
         {
-            Registry = "Software\\Dialing\\Lemmatizer\\English\\DictPath";
+            Registry = "Software\\Dialing\\Lemmatizer\\German\\DictPath";
         }
 
         protected override string FilterSrc(string src)

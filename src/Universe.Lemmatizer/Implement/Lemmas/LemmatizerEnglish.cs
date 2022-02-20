@@ -33,34 +33,21 @@
 //  ║                                                                                 ║
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
-namespace Universe.Lemmatizer.Implement
-{
-    internal class LemmatizerRussian : Lemmatizer
-    {
-        public LemmatizerRussian()
-            : base(InternalMorphLanguage.morphRussian)
-        {
-            Registry = "Software\\Dialing\\Lemmatizer\\Russian\\DictPath";
-            HyphenPostfixes.Add("КА");
-            HyphenPostfixes.Add("ТО");
-            HyphenPostfixes.Add("С");
-            HyphenPrefixes.Add("ПОЛУ");
-            HyphenPrefixes.Add("ПОЛ");
-            HyphenPrefixes.Add("ВИЦЕ");
-            HyphenPrefixes.Add("МИНИ");
-            HyphenPrefixes.Add("КИК");
-        }
+using Universe.Lemmatizer.Models;
 
-        private static string ConvertJO2Je(string src)
+namespace Universe.Lemmatizer.Implement.Lemmas
+{
+    internal class LemmatizerEnglish : Lemmas.Lemmatizer
+    {
+        public LemmatizerEnglish()
+            : base(InternalMorphLanguage.MorphEnglish)
         {
-            return src.Replace('Ё', 'Е').Replace('ё', 'е');
+            Registry = "Software\\Dialing\\Lemmatizer\\English\\DictPath";
         }
 
         protected override string FilterSrc(string src)
         {
-            if (!AllowRussianJo)
-                src = ConvertJO2Je(src);
-            return src.Replace('\'', 'ъ');
+            return src;
         }
     }
 }

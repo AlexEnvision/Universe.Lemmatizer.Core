@@ -34,6 +34,7 @@
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
 using Universe.Lemmatizer.Implement;
+using Universe.Lemmatizer.Implement.Lemmas;
 
 namespace Universe.Lemmatizer
 {

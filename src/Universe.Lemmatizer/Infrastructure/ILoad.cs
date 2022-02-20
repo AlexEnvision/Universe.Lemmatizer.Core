@@ -33,34 +33,12 @@
 //  ║                                                                                 ║
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
-namespace Universe.Lemmatizer.Implement
+using System.IO;
+
+namespace Universe.Lemmatizer.Infrastructure
 {
-    internal class MorphAutomNode
+    internal interface ILoad
     {
-        private uint _data;
-
-        public int ChildrenStart
-        {
-            get => (int) _data & int.MaxValue;
-            set => _data = (uint) ((int.MinValue & (int) _data) | value);
-        }
-
-        public int Data
-        {
-            get => (int) _data;
-            set => _data = (uint) value;
-        }
-
-        public bool IsFinal
-        {
-            get => (_data & 2147483648U) > 0U;
-            set
-            {
-                if (value)
-                    _data |= 2147483648U;
-                else
-                    _data &= int.MaxValue;
-            }
-        }
+        bool Load(Stream stream);
     }
 }

@@ -33,108 +33,65 @@
 //  ║                                                                                 ║
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
-using System;
-using Universe.Lemmatizer.Implement.Agramtab;
+using System.Collections;
+using System.Collections.Generic;
 
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Types.Collections
 {
-    internal class ABCEncoder
+    internal class Set<T> : ICollection<T>, IEnumerable<T>, IEnumerable
     {
-        protected int[] _alphabet2Code = new int[256];
+        private readonly SortedList<T, T> _list;
 
-        private readonly int[] _alphabet2CodeWithoutAnnotator = new int[256];
-
-        private readonly int _alphabetSize;
-
-        private readonly int _alphabetSizeWithoutAnnotator;
-
-        private readonly int[] _code2Alphabet = new int[54];
-
-        private readonly int[] _code2AlphabetWithoutAnnotator = new int[54];
-
-        public ABCEncoder(Lemmatizer lemmatizer, InternalMorphLanguage language, char annotChar)
+        public Set()
         {
-            Lemmatizer = lemmatizer;
-            AnnotChar = annotChar;
-            _alphabetSize = InitAlphabet(language, _code2Alphabet, _alphabet2Code, AnnotChar);
-            _alphabetSizeWithoutAnnotator = InitAlphabet(language, _code2AlphabetWithoutAnnotator,
-                _alphabet2CodeWithoutAnnotator, 'ā');
-            if (_alphabetSizeWithoutAnnotator + 1 != _alphabetSize)
-                throw new MorphException("_alphabetSizeWithoutAnnotator + 1 != _alphabetSize");
+            _list = new SortedList<T, T>();
         }
 
-        public char AnnotChar { get; }
-
-        public string CriticalNounLetterPack => new string(AnnotChar, 3);
-
-        public InternalMorphLanguage Language => Lemmatizer.Language;
-
-        public Lemmatizer Lemmatizer { get; }
-
-        public bool CheckABCWithAnnotator(string wordForm)
+        public void Add(T item)
         {
-            var length = wordForm.Length;
-            for (var index = 0; index < length; ++index)
-                if (_alphabet2Code[Tools.GetByte(wordForm[index])] == -1)
-                    return false;
-            return true;
+            if (_list.ContainsKey(item))
+                return;
+            _list.Add(item, item);
         }
 
-        public bool CheckABCWithoutAnnotator(string wordForm)
+        public void Clear()
         {
-            var length = wordForm.Length;
-            for (var index = 0; index < length; ++index)
-                if (_alphabet2CodeWithoutAnnotator[Tools.GetByte(wordForm[index])] == -1)
-                    return false;
-            return true;
+            _list.Clear();
         }
 
-        public int DecodeFromAlphabet(string v)
+        public bool Contains(T item)
         {
-            var length = v.Length;
-            var num1 = 1;
-            var num2 = 0;
-            for (var index = 0; index < length; ++index)
-            {
-                num2 += _alphabet2CodeWithoutAnnotator[Tools.GetByte(v[index])] * num1;
-                num1 *= _alphabetSizeWithoutAnnotator;
-            }
-
-            return num2;
+            return _list.ContainsKey(item);
         }
 
-        private static int InitAlphabet(
-            InternalMorphLanguage language,
-            int[] pCode2Alphabet,
-            int[] pAlphabet2Code,
-            char annotChar)
+        public void CopyTo(T[] array, int arrayIndex)
         {
-            if (char.IsUpper(annotChar))
-                throw new MorphException("annotChar is not upper");
-            var str1 = "'1234567890";
-            var str2 = "";
-            var index1 = 0;
-            for (var index2 = 0; index2 < 256; ++index2)
-            {
-                var ch = Convert.ToChar(index2);
-                if (Lang.is_upper_alpha((byte) index2, language) || ch == '-' || ch == annotChar ||
-                    language == InternalMorphLanguage.morphEnglish && str1.IndexOf(ch) >= 0 ||
-                    language == InternalMorphLanguage.morphGerman && str2.IndexOf(ch) >= 0 ||
-                    language == InternalMorphLanguage.morphURL && Lang.is_alpha((byte) index2, language))
-                {
-                    pCode2Alphabet[index1] = index2;
-                    pAlphabet2Code[index2] = index1;
-                    ++index1;
-                }
-                else
-                {
-                    pAlphabet2Code[index2] = -1;
-                }
-            }
+            _list.Keys.CopyTo(array, arrayIndex);
+        }
 
-            if (index1 > 54)
-                throw new MorphException("Error! The  ABC is too large");
-            return index1;
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _list.Keys.GetEnumerator();
+        }
+
+        public bool Remove(T item)
+        {
+            return _list.Remove(item);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public int Count => _list.Count;
+
+        public bool IsReadOnly => false;
+
+        public void AddRange(IEnumerable<T> collection)
+        {
+            foreach (var obj in collection)
+                Add(obj);
         }
     }
 }

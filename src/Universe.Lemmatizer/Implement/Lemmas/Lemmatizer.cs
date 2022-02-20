@@ -37,8 +37,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Universe.Lemmatizer.Implement.Agramtab;
+using Universe.Lemmatizer.Implement.Morphology;
+using Universe.Lemmatizer.Models;
+using Universe.Lemmatizer.Types.Collections;
 
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Implement.Lemmas
 {
     internal abstract class Lemmatizer : MorphDict, ILemmatizer
     {
@@ -381,7 +384,7 @@ namespace Universe.Lemmatizer.Implement
                 }
             }
 
-            if (numArray[0] != -1 && (!isCap || Language == InternalMorphLanguage.morphGerman))
+            if (numArray[0] != -1 && (!isCap || Language == InternalMorphLanguage.MorphGerman))
                 return;
             _predict.Find(FormAutomat.CriticalNounLetterPack, predictTupleList);
             findResults.Add(ConvertPredictTupleToAnnot(predictTupleList[predictTupleList.Count - 1]));

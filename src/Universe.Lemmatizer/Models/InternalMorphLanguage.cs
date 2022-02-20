@@ -33,36 +33,16 @@
 //  ║                                                                                 ║
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
-using System;
-
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Models
 {
-    internal class LemmaInfoAndLemma : IComparable<LemmaInfoAndLemma>
+    internal enum InternalMorphLanguage
     {
-        public LemmaInfoAndLemma(
-            int lemmaStrNo,
-            short flexiaModelNo,
-            short accentModelNo,
-            char[] commonAncode)
-        {
-            LemmaStrNo = lemmaStrNo;
-            LemmaInfo = new LemmaInfo(flexiaModelNo, accentModelNo, commonAncode);
-        }
-
-        public LemmaInfo LemmaInfo { get; }
-
-        public int LemmaStrNo { get; }
-
-        public int CompareTo(LemmaInfoAndLemma other)
-        {
-            return (int) LemmaInfo.FlexiaModelNo != (int) other.LemmaInfo.FlexiaModelNo
-                ? LemmaInfo.FlexiaModelNo.CompareTo(other.LemmaInfo.FlexiaModelNo)
-                : LemmaStrNo.CompareTo(other.LemmaStrNo);
-        }
-
-        public override string ToString()
-        {
-            return string.Format("StrNo={0};Info=[{1}]", LemmaStrNo, LemmaInfo);
-        }
+        MorphUnknown,
+        MorphRussian,
+        MorphEnglish,
+        MorphGerman,
+        MorphGeneric,
+        MorphUrl,
+        MorphDigits
     }
 }

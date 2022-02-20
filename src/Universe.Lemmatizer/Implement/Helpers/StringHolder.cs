@@ -33,19 +33,26 @@
 //  ║                                                                                 ║
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
-namespace Universe.Lemmatizer.Implement
-{
-    internal class LemmatizerGerman : Lemmatizer
-    {
-        public LemmatizerGerman()
-            : base(InternalMorphLanguage.morphGerman)
-        {
-            Registry = "Software\\Dialing\\Lemmatizer\\German\\DictPath";
-        }
+using System.Collections.Generic;
+using System.IO;
+using Universe.Lemmatizer.Implement.Agramtab;
 
-        protected override string FilterSrc(string src)
+namespace Universe.Lemmatizer.Implement.Helpers
+{
+    internal class StringHolder : List<string>
+    {
+        internal void ReadShortStringHolder(Stream file)
         {
-            return src;
+            Clear();
+            var binaryReader = new BinaryReader(file, Tools.InternalEncoding);
+            var num1 = binaryReader.ReadInt32();
+            for (var index = 0; index < num1; ++index)
+            {
+                var num2 = binaryReader.ReadByte();
+                var chArray = binaryReader.ReadChars(num2);
+                var num3 = (int) binaryReader.ReadByte();
+                Add(new string(chArray));
+            }
         }
     }
 }

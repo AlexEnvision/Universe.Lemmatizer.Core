@@ -37,6 +37,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Universe.Lemmatizer.Infrastructure;
+using Universe.Lemmatizer.Models;
 
 namespace Universe.Lemmatizer.Implement.Agramtab
 {
@@ -79,15 +81,15 @@ namespace Universe.Lemmatizer.Implement.Agramtab
         {
             switch (langua)
             {
-                case InternalMorphLanguage.morphRussian:
+                case InternalMorphLanguage.MorphRussian:
                     return "Russian";
-                case InternalMorphLanguage.morphEnglish:
+                case InternalMorphLanguage.MorphEnglish:
                     return "English";
-                case InternalMorphLanguage.morphGerman:
+                case InternalMorphLanguage.MorphGerman:
                     return "German";
-                case InternalMorphLanguage.morphGeneric:
+                case InternalMorphLanguage.MorphGeneric:
                     return "Generic";
-                case InternalMorphLanguage.morphURL:
+                case InternalMorphLanguage.MorphUrl:
                     return "URL_ABC";
                 default:
                     return "unk";

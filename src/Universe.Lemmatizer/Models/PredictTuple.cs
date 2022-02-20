@@ -33,56 +33,14 @@
 //  ║                                                                                 ║
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Models
 {
-    internal class AutomAnnotationInner
+    internal class PredictTuple
     {
-        private ushort _itemNo;
+        public short ItemNo { get; set; }
 
-        private uint _lemmaInfoNo;
+        public int LemmaInfoNo { get; set; }
 
-        private ushort _modelNo;
-
-        private ushort _prefixNo;
-
-        private uint _weight;
-
-        public short ItemNo
-        {
-            get => (short) _itemNo;
-            set => _itemNo = (ushort) value;
-        }
-
-        public int LemmaInfoNo
-        {
-            get => (int) _lemmaInfoNo;
-            set => _lemmaInfoNo = (uint) value;
-        }
-
-        public short ModelNo
-        {
-            get => (short) _modelNo;
-            set => _modelNo = (ushort) value;
-        }
-
-        public int ParadigmId => (_prefixNo << 23) | (int) _lemmaInfoNo;
-
-        public short PrefixNo
-        {
-            get => (short) _prefixNo;
-            set => _prefixNo = (ushort) value;
-        }
-
-        public int Weight
-        {
-            get => (int) _weight;
-            set => _weight = (uint) value;
-        }
-
-        public void SplitParadigmId(int value)
-        {
-            _prefixNo = (ushort) (value >> 23);
-            _lemmaInfoNo = (uint) (value & 8388607);
-        }
+        public byte PartOfSpeechNo { get; set; }
     }
 }

@@ -35,9 +35,11 @@
 
 using System;
 using Universe.Lemmatizer.Implement.Agramtab;
+using Universe.Lemmatizer.Implement.Lemmas;
 using Universe.Lemmatizer.Implement.MorphWizard;
+using Universe.Lemmatizer.Models;
 
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Implement.Morphology
 {
     internal class FormInfo : IParadigm, ICloneable
     {
@@ -45,7 +47,7 @@ namespace Universe.Lemmatizer.Implement
 
         private AutomAnnotationInner _innerAnnot;
 
-        private Lemmatizer _parent;
+        private Lemmas.Lemmatizer _parent;
 
         private bool _prefixesWereCut;
 
@@ -56,7 +58,7 @@ namespace Universe.Lemmatizer.Implement
             Founded = true;
         }
 
-        public FormInfo(Lemmatizer parent, AutomAnnotationInner a, string inputWordForm, bool found)
+        public FormInfo(Lemmas.Lemmatizer parent, AutomAnnotationInner a, string inputWordForm, bool found)
         {
             _innerAnnot = a;
             _parent = parent;
@@ -187,7 +189,7 @@ namespace Universe.Lemmatizer.Implement
 
         public int WordWeight => !IsValid ? 0 : _parent.Statistic.GetWordWeight(ParadigmID);
 
-        public void AttachLemmatizer(Lemmatizer parent)
+        public void AttachLemmatizer(Lemmas.Lemmatizer parent)
         {
             _parent = parent;
         }

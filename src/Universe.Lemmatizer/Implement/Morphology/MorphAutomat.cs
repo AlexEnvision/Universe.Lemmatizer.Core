@@ -37,8 +37,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Universe.Lemmatizer.Implement.Agramtab;
+using Universe.Lemmatizer.Implement.Encoders;
+using Universe.Lemmatizer.Models;
 
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Implement.Morphology
 {
     internal class MorphAutomat : ABCEncoder
     {
@@ -48,7 +50,7 @@ namespace Universe.Lemmatizer.Implement
 
         private MorphAutomRelation[] _relations;
 
-        public MorphAutomat(Lemmatizer lemmatizer, InternalMorphLanguage language, char annotChar)
+        public MorphAutomat(Lemmas.Lemmatizer lemmatizer, InternalMorphLanguage language, char annotChar)
             : base(lemmatizer, language, annotChar)
         {
         }

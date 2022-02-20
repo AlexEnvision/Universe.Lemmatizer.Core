@@ -77,7 +77,7 @@ namespace Universe.Lemmatizer
                         for (; str1 != null; str1 = streamReader.ReadLine())
                         {
                             var strArray = str1.Split(' ', '\t');
-                            if (strArray != null && strArray.Length == 2 && strArray[0] == registryPath)
+                            if (strArray.Length > 0 && strArray.Length == 2 && strArray[0] == registryPath)
                             {
                                 var str2 = strArray[1];
                                 if (str2.StartsWith("$RML"))

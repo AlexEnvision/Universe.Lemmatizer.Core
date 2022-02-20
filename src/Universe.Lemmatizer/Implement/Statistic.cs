@@ -37,6 +37,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Universe.Lemmatizer.Implement.Agramtab;
+using Universe.Lemmatizer.Infrastructure;
 
 namespace Universe.Lemmatizer.Implement
 {
@@ -69,18 +70,18 @@ namespace Universe.Lemmatizer.Implement
             return index >= 0 && index < _wordWeights.Count ? _wordWeights[index].X2 : 0;
         }
 
-        public void Load(Lemmatizer lemmatizer, string prefix, FileManager manager)
+        public void Load(Lemmas.Lemmatizer lemmatizer, string prefix, FileManager manager)
         {
-            Stream file1;
-            using (file1 = manager.GetFile(lemmatizer.Registry, prefix + "homoweight.bin"))
+            Stream homoweightFs;
+            using (homoweightFs = manager.GetFile(lemmatizer.Registry, prefix + "homoweight.bin"))
             {
-                Tools.LoadList(file1, _homoWeights);
+                Tools.LoadList(homoweightFs, _homoWeights);
             }
 
-            Stream file2;
-            using (file2 = manager.GetFile(lemmatizer.Registry, prefix + "wordweight.bin"))
+            Stream wordweightFs;
+            using (wordweightFs = manager.GetFile(lemmatizer.Registry, prefix + "wordweight.bin"))
             {
-                Tools.LoadList(file2, _wordWeights);
+                Tools.LoadList(wordweightFs, _wordWeights);
             }
         }
 

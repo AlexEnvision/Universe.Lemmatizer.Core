@@ -33,26 +33,109 @@
 //  ║                                                                                 ║
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
-using System.Collections.Generic;
-using System.IO;
+using System;
 using Universe.Lemmatizer.Implement.Agramtab;
+using Universe.Lemmatizer.Models;
 
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Implement.Encoders
 {
-    internal class StringHolder : List<string>
+    internal class ABCEncoder
     {
-        internal void ReadShortStringHolder(Stream file)
+        protected int[] _alphabet2Code = new int[256];
+
+        private readonly int[] _alphabet2CodeWithoutAnnotator = new int[256];
+
+        private readonly int _alphabetSize;
+
+        private readonly int _alphabetSizeWithoutAnnotator;
+
+        private readonly int[] _code2Alphabet = new int[54];
+
+        private readonly int[] _code2AlphabetWithoutAnnotator = new int[54];
+
+        public ABCEncoder(Lemmas.Lemmatizer lemmatizer, InternalMorphLanguage language, char annotChar)
         {
-            Clear();
-            var binaryReader = new BinaryReader(file, Tools.InternalEncoding);
-            var num1 = binaryReader.ReadInt32();
-            for (var index = 0; index < num1; ++index)
+            Lemmatizer = lemmatizer;
+            AnnotChar = annotChar;
+            _alphabetSize = InitAlphabet(language, _code2Alphabet, _alphabet2Code, AnnotChar);
+            _alphabetSizeWithoutAnnotator = InitAlphabet(language, _code2AlphabetWithoutAnnotator,
+                _alphabet2CodeWithoutAnnotator, 'ā');
+            if (_alphabetSizeWithoutAnnotator + 1 != _alphabetSize)
+                throw new MorphException("_alphabetSizeWithoutAnnotator + 1 != _alphabetSize");
+        }
+
+        public char AnnotChar { get; }
+
+        public string CriticalNounLetterPack => new string(AnnotChar, 3);
+
+        public InternalMorphLanguage Language => Lemmatizer.Language;
+
+        public Lemmas.Lemmatizer Lemmatizer { get; }
+
+        public bool CheckABCWithAnnotator(string wordForm)
+        {
+            var length = wordForm.Length;
+            for (var index = 0; index < length; ++index)
+                if (_alphabet2Code[Tools.GetByte(wordForm[index])] == -1)
+                    return false;
+            return true;
+        }
+
+        public bool CheckABCWithoutAnnotator(string wordForm)
+        {
+            var length = wordForm.Length;
+            for (var index = 0; index < length; ++index)
+                if (_alphabet2CodeWithoutAnnotator[Tools.GetByte(wordForm[index])] == -1)
+                    return false;
+            return true;
+        }
+
+        public int DecodeFromAlphabet(string v)
+        {
+            var length = v.Length;
+            var num1 = 1;
+            var num2 = 0;
+            for (var index = 0; index < length; ++index)
             {
-                var num2 = binaryReader.ReadByte();
-                var chArray = binaryReader.ReadChars(num2);
-                var num3 = (int) binaryReader.ReadByte();
-                Add(new string(chArray));
+                num2 += _alphabet2CodeWithoutAnnotator[Tools.GetByte(v[index])] * num1;
+                num1 *= _alphabetSizeWithoutAnnotator;
             }
+
+            return num2;
+        }
+
+        private static int InitAlphabet(
+            InternalMorphLanguage language,
+            int[] pCode2Alphabet,
+            int[] pAlphabet2Code,
+            char annotChar)
+        {
+            if (char.IsUpper(annotChar))
+                throw new MorphException("annotChar is not upper");
+            var str1 = "'1234567890";
+            var str2 = "";
+            var index1 = 0;
+            for (var index2 = 0; index2 < 256; ++index2)
+            {
+                var ch = Convert.ToChar(index2);
+                if (Lang.is_upper_alpha((byte) index2, language) || ch == '-' || ch == annotChar ||
+                    language == InternalMorphLanguage.MorphEnglish && str1.IndexOf(ch) >= 0 ||
+                    language == InternalMorphLanguage.MorphGerman && str2.IndexOf(ch) >= 0 ||
+                    language == InternalMorphLanguage.MorphUrl && Lang.is_alpha((byte) index2, language))
+                {
+                    pCode2Alphabet[index1] = index2;
+                    pAlphabet2Code[index2] = index1;
+                    ++index1;
+                }
+                else
+                {
+                    pAlphabet2Code[index2] = -1;
+                }
+            }
+
+            if (index1 > 54)
+                throw new MorphException("Error! The  ABC is too large");
+            return index1;
         }
     }
 }

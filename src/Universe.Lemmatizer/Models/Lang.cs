@@ -34,8 +34,9 @@
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
 using System;
+using Universe.Lemmatizer.Implement;
 
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Models
 {
     internal static class Lang
     {
@@ -308,15 +309,15 @@ namespace Universe.Lemmatizer.Implement
         {
             switch (Langua)
             {
-                case InternalMorphLanguage.morphRussian:
+                case InternalMorphLanguage.MorphRussian:
                     return is_russian_alpha(x);
-                case InternalMorphLanguage.morphEnglish:
+                case InternalMorphLanguage.MorphEnglish:
                     return is_english_alpha(x);
-                case InternalMorphLanguage.morphGerman:
+                case InternalMorphLanguage.MorphGerman:
                     return is_german_alpha(x);
-                case InternalMorphLanguage.morphGeneric:
+                case InternalMorphLanguage.MorphGeneric:
                     return is_generic_alpha(x);
-                case InternalMorphLanguage.morphURL:
+                case InternalMorphLanguage.MorphUrl:
                     return is_URL_alpha(x);
                 default:
                     throw new MorphException("unknown char x");
@@ -387,11 +388,11 @@ namespace Universe.Lemmatizer.Implement
         {
             switch (Langua)
             {
-                case InternalMorphLanguage.morphRussian:
+                case InternalMorphLanguage.MorphRussian:
                     return is_russian_lower_vowel(x);
-                case InternalMorphLanguage.morphEnglish:
+                case InternalMorphLanguage.MorphEnglish:
                     return is_english_lower_vowel(x);
-                case InternalMorphLanguage.morphGerman:
+                case InternalMorphLanguage.MorphGerman:
                     return is_german_lower_vowel(x);
                 default:
                     return false;
@@ -427,15 +428,15 @@ namespace Universe.Lemmatizer.Implement
         {
             switch (Langua)
             {
-                case InternalMorphLanguage.morphRussian:
+                case InternalMorphLanguage.MorphRussian:
                     return is_russian_upper(x);
-                case InternalMorphLanguage.morphEnglish:
+                case InternalMorphLanguage.MorphEnglish:
                     return is_english_upper(x);
-                case InternalMorphLanguage.morphGerman:
+                case InternalMorphLanguage.MorphGerman:
                     return is_german_upper(x);
-                case InternalMorphLanguage.morphGeneric:
+                case InternalMorphLanguage.MorphGeneric:
                     return is_generic_upper(x);
-                case InternalMorphLanguage.morphURL:
+                case InternalMorphLanguage.MorphUrl:
                     return false;
                 default:
                     return false;
@@ -451,11 +452,11 @@ namespace Universe.Lemmatizer.Implement
         {
             switch (Langua)
             {
-                case InternalMorphLanguage.morphRussian:
+                case InternalMorphLanguage.MorphRussian:
                     return is_russian_upper_vowel(x);
-                case InternalMorphLanguage.morphEnglish:
+                case InternalMorphLanguage.MorphEnglish:
                     return is_english_upper_vowel(x);
-                case InternalMorphLanguage.morphGerman:
+                case InternalMorphLanguage.MorphGerman:
                     return is_german_upper_vowel(x);
                 default:
                     return false;

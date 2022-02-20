@@ -33,53 +33,34 @@
 //  ║                                                                                 ║
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
-using System;
-
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Implement.Morphology
 {
-    internal class LemmaInfo : IComparable<LemmaInfo>, IEquatable<LemmaInfo>
+    internal class MorphAutomNode
     {
-        private readonly ushort _accentModelNo;
-        private readonly char[] _commonAncode;
-        private readonly ushort _flexiaModelNo;
+        private uint _data;
 
-        public LemmaInfo()
+        public int ChildrenStart
         {
-            _commonAncode = new char[2];
-            _flexiaModelNo = 65534;
-            _accentModelNo = 65534;
+            get => (int) _data & int.MaxValue;
+            set => _data = (uint) ((int.MinValue & (int) _data) | value);
         }
 
-        public LemmaInfo(short flexiaModelNo, short accentModelNo, char[] commonAncode)
+        public int Data
         {
-            _commonAncode = commonAncode;
-            _flexiaModelNo = (ushort) flexiaModelNo;
-            _accentModelNo = (ushort) accentModelNo;
+            get => (int) _data;
+            set => _data = (uint) value;
         }
 
-        public short AccentModelNo => (short) _accentModelNo;
-
-        public short FlexiaModelNo => (short) _flexiaModelNo;
-
-        public string GetCommonAncodeIfCan => _commonAncode[0] == char.MinValue ? "" : new string(_commonAncode);
-
-        public int CompareTo(LemmaInfo other)
+        public bool IsFinal
         {
-            if (_flexiaModelNo != other._flexiaModelNo)
-                return _flexiaModelNo.CompareTo(other._flexiaModelNo);
-            var num = new string(_commonAncode).CompareTo(new string(other._commonAncode));
-            return num != 0 ? num : _accentModelNo.CompareTo(other._accentModelNo);
-        }
-
-        public bool Equals(LemmaInfo other)
-        {
-            return CompareTo(other) == 0;
-        }
-
-        public override string ToString()
-        {
-            return string.Format("Flexia={0};Accent={1},Ancode={2}", _flexiaModelNo, _accentModelNo,
-                GetCommonAncodeIfCan);
+            get => (_data & 2147483648U) > 0U;
+            set
+            {
+                if (value)
+                    _data |= 2147483648U;
+                else
+                    _data &= int.MaxValue;
+            }
         }
     }
 }

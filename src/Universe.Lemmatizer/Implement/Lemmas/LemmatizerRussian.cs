@@ -33,65 +33,36 @@
 //  ║                                                                                 ║
 //  ╚═════════════════════════════════════════════════════════════════════════════════╝
 
-using System.Collections;
-using System.Collections.Generic;
+using Universe.Lemmatizer.Models;
 
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Implement.Lemmas
 {
-    internal class Set<T> : ICollection<T>, IEnumerable<T>, IEnumerable
+    internal class LemmatizerRussian : Lemmas.Lemmatizer
     {
-        private readonly SortedList<T, T> _list;
-
-        public Set()
+        public LemmatizerRussian()
+            : base(InternalMorphLanguage.MorphRussian)
         {
-            _list = new SortedList<T, T>();
+            Registry = "Software\\Dialing\\Lemmatizer\\Russian\\DictPath";
+            HyphenPostfixes.Add("КА");
+            HyphenPostfixes.Add("ТО");
+            HyphenPostfixes.Add("С");
+            HyphenPrefixes.Add("ПОЛУ");
+            HyphenPrefixes.Add("ПОЛ");
+            HyphenPrefixes.Add("ВИЦЕ");
+            HyphenPrefixes.Add("МИНИ");
+            HyphenPrefixes.Add("КИК");
         }
 
-        public void Add(T item)
+        private static string ConvertJO2Je(string src)
         {
-            if (_list.ContainsKey(item))
-                return;
-            _list.Add(item, item);
+            return src.Replace('Ё', 'Е').Replace('ё', 'е');
         }
 
-        public void Clear()
+        protected override string FilterSrc(string src)
         {
-            _list.Clear();
-        }
-
-        public bool Contains(T item)
-        {
-            return _list.ContainsKey(item);
-        }
-
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            _list.Keys.CopyTo(array, arrayIndex);
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            return _list.Keys.GetEnumerator();
-        }
-
-        public bool Remove(T item)
-        {
-            return _list.Remove(item);
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        public int Count => _list.Count;
-
-        public bool IsReadOnly => false;
-
-        public void AddRange(IEnumerable<T> collection)
-        {
-            foreach (var obj in collection)
-                Add(obj);
+            if (!AllowRussianJo)
+                src = ConvertJO2Je(src);
+            return src.Replace('\'', 'ъ');
         }
     }
 }

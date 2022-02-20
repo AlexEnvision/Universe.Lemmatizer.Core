@@ -35,6 +35,7 @@
 
 using System.Collections.Generic;
 using Universe.Lemmatizer.Implement;
+using Universe.Lemmatizer.Implement.Morphology;
 
 namespace Universe.Lemmatizer
 {

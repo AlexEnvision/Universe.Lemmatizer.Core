@@ -37,9 +37,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Universe.Lemmatizer.Implement.Agramtab;
+using Universe.Lemmatizer.Implement.Helpers;
+using Universe.Lemmatizer.Implement.Lemmas;
 using Universe.Lemmatizer.Implement.MorphWizard;
+using Universe.Lemmatizer.Models;
 
-namespace Universe.Lemmatizer.Implement
+namespace Universe.Lemmatizer.Implement.Morphology
 {
     internal class MorphDict
     {

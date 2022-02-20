@@ -35,6 +35,9 @@
 
 using System.Collections.Generic;
 using Universe.Lemmatizer.Implement.Agramtab;
+using Universe.Lemmatizer.Implement.Lemmas;
+using Universe.Lemmatizer.Implement.Morphology;
+using Universe.Lemmatizer.Models;
 
 namespace Universe.Lemmatizer.Implement
 {
@@ -44,7 +47,7 @@ namespace Universe.Lemmatizer.Implement
 
         private readonly MorphAutomat _suffixAutomat;
 
-        public PredictBase(Lemmatizer lemmatizer, InternalMorphLanguage lang)
+        public PredictBase(Lemmas.Lemmatizer lemmatizer, InternalMorphLanguage lang)
         {
             _suffixAutomat = new MorphAutomat(lemmatizer, lang, '+');
         }
